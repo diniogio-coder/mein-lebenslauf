@@ -1,0 +1,1617 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dinio Maag — Lebenslauf</title>
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --green: #1DB954;
+  --black: #121212;
+  --surface: #181818;
+  --surface2: #242424;
+  --surface3: #2e2e2e;
+  --text: #FFFFFF;
+  --muted: #b3b3b3;
+  --faint: #535353;
+  --sidebar: 240px;
+  --detail-width: 320px;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  background: var(--black);
+  color: var(--text);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.hidden { display: none !important; }
+
+.app {
+  display: flex;
+  flex: 1;
+  gap: 8px;
+  padding: 8px 8px 0 8px;
+  overflow: hidden;
+  min-height: 0;
+}
+
+/* ── LEFT SIDEBAR ── */
+.sidebar {
+  width: var(--sidebar);
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow: hidden;
+}
+.sidebar-top {
+  background: var(--surface);
+  border-radius: 8px;
+  padding: 20px 12px;
+}
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 8px 12px;
+  border-radius: 4px;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: color .15s;
+}
+.nav-link:hover, .nav-link.active { color: var(--text); }
+.sidebar-lib {
+  background: var(--surface);
+  border-radius: 8px;
+  padding: 12px;
+  flex: 1;
+  overflow-y: auto;
+  min-height: 0;
+}
+.sidebar-lib::-webkit-scrollbar { display: none; }
+.lib-heading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+  padding: 4px 8px 12px;
+}
+.pl-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background .15s;
+}
+.pl-item:hover { background: var(--surface2); }
+.pl-item.active { background: var(--surface3); }
+.pl-thumb {
+  width: 44px; height: 44px;
+  border-radius: 4px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.pl-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.pl-label { overflow: hidden; }
+.pl-name { font-size: 13px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pl-meta { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+/* ── CENTER MAIN ── */
+.main {
+  flex: 1;
+  background: var(--surface);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  min-width: 0;
+}
+.topbar {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  padding: 14px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 20;
+  background: linear-gradient(to bottom, rgba(0,0,0,.5) 0%, transparent 100%);
+  pointer-events: none;
+}
+.topbar-btns { display: flex; gap: 8px; pointer-events: all; }
+.top-btn {
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  background: rgba(0,0,0,.7);
+  border: none; color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background .15s;
+}
+.top-btn:hover { background: rgba(0,0,0,.9); }
+.top-user {
+  pointer-events: all;
+  display: flex; align-items: center; gap: 8px;
+  background: rgba(0,0,0,.7);
+  border-radius: 20px;
+  padding: 3px 10px 3px 3px;
+  font-size: 13px; font-weight: 700;
+  cursor: pointer;
+}
+.user-av {
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  background: var(--green);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 900;
+}
+
+.content {
+  flex: 1;
+  overflow-y: auto;
+  min-height: 0;
+}
+.content::-webkit-scrollbar { width: 6px; }
+.content::-webkit-scrollbar-thumb { background: var(--faint); border-radius: 3px; }
+.content::-webkit-scrollbar-track { background: transparent; }
+
+/* ── HERO BANNER ── */
+.hero-banner {
+  position: relative;
+  width: 100%;
+  height: 280px;
+  overflow: hidden;
+  flex-shrink: 0;
+  /* Fallback-Gradient — sichtbar solange banner.jpg fehlt oder lädt */
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 40%, #0f3460 70%, #1a1a2e 100%);
+}
+.hero-banner-img {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+.hero-deco {
+  position: absolute;
+  border-radius: 50%;
+  opacity: .08;
+  pointer-events: none;
+}
+.hero-banner-inner {
+  position: absolute; inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 32px 32px 28px;
+  background: linear-gradient(to top, rgba(0,0,0,.75) 0%, transparent 60%);
+}
+.hero-tag {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--green);
+  margin-bottom: 8px;
+}
+.hero-name {
+  font-size: 52px;
+  font-weight: 900;
+  letter-spacing: -2px;
+  line-height: 1;
+  margin-bottom: 8px;
+  text-shadow: 0 2px 20px rgba(0,0,0,.5);
+}
+.hero-sub {
+  font-size: 16px;
+  color: rgba(255,255,255,.8);
+  font-weight: 400;
+}
+
+/* HOME */
+#view-home { padding-bottom: 24px; }
+.home-greeting { padding: 20px 24px 4px; font-size: 20px; font-weight: 700; }
+.section { padding: 12px 24px 24px; }
+.sec-title { font-size: 20px; font-weight: 700; margin-bottom: 14px; }
+
+.quick-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 8px;
+}
+.q-card {
+  display: flex; align-items: center;
+  background: var(--surface2);
+  border-radius: 4px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: background .15s;
+}
+.q-card:hover { background: #333; }
+.q-icon {
+  width: 52px; height: 52px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 24px; flex-shrink: 0;
+  overflow: hidden;
+}
+.q-icon img { width: 100%; height: 100%; object-fit: cover; }
+.q-name { font-size: 13px; font-weight: 700; padding: 0 12px; }
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(165px, 1fr));
+  gap: 20px;
+}
+.card {
+  background: var(--surface2);
+  border-radius: 8px;
+  padding: 16px;
+  cursor: pointer;
+  transition: background .2s;
+  position: relative;
+}
+.card:hover { background: var(--surface3); }
+.card:hover .play-fab { opacity: 1; transform: translateY(0); }
+.card-art {
+  width: 100%; aspect-ratio: 1;
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 48px;
+  margin-bottom: 14px;
+  box-shadow: 0 8px 24px rgba(0,0,0,.5);
+  position: relative;
+  overflow: hidden;
+}
+.card-art img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 6px; }
+.card-art img + .card-art-emoji { display: none; }
+.card-art-emoji { font-size: 48px; }
+.play-fab {
+  position: absolute; bottom: 8px; right: 8px;
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: var(--green);
+  border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; transform: translateY(8px);
+  transition: opacity .2s, transform .2s, background .15s;
+  box-shadow: 0 8px 16px rgba(0,0,0,.5);
+  z-index: 2;
+}
+.play-fab:hover { background: #1ed760; }
+.card-name { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+.card-desc { font-size: 12px; color: var(--muted); line-height: 1.4; }
+
+/* PLAYLIST VIEW */
+#view-playlist { padding-bottom: 32px; }
+.pl-hero {
+  padding: 80px 24px 24px;
+  display: flex; align-items: flex-end; gap: 24px;
+}
+.hero-art-pl {
+  width: 200px; height: 200px;
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 80px;
+  flex-shrink: 0;
+  box-shadow: 0 16px 40px rgba(0,0,0,.6);
+  overflow: hidden;
+  position: relative;
+}
+.hero-art-pl img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.hero-type { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px; color: var(--muted); }
+.hero-title { font-size: 42px; font-weight: 900; line-height: 1.05; letter-spacing: -1.5px; margin-bottom: 12px; }
+.hero-meta { font-size: 13px; color: var(--muted); }
+.hero-meta strong { color: var(--text); }
+.pl-toolbar {
+  padding: 20px 24px;
+  display: flex; align-items: center; gap: 20px;
+}
+.play-big {
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  background: var(--green);
+  border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: transform .1s, background .15s;
+}
+.play-big:hover { background: #1ed760; transform: scale(1.05); }
+.toolbar-desc { font-size: 13px; color: var(--muted); }
+
+/* Track list — now with album art column */
+.track-table { padding: 0 24px; }
+.track-header {
+  display: grid;
+  grid-template-columns: 40px 52px 1fr 180px 150px;
+  gap: 12px;
+  padding: 6px 12px;
+  border-bottom: 1px solid rgba(255,255,255,.1);
+  margin-bottom: 4px;
+  color: var(--muted);
+  font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1px;
+  align-items: center;
+}
+.track-row {
+  display: grid;
+  grid-template-columns: 40px 52px 1fr 180px 150px;
+  gap: 12px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  align-items: center;
+  cursor: pointer;
+  transition: background .15s;
+}
+.track-row:hover { background: var(--surface2); }
+.track-row.playing { background: rgba(29,185,84,.08); }
+.track-row.playing .t-name { color: var(--green); }
+.track-row.playing .t-num { color: var(--green); }
+
+.t-idx { text-align: center; }
+.t-num { color: var(--muted); font-size: 15px; }
+.t-play { display: none; color: var(--text); font-size: 14px; }
+.track-row:hover .t-num { display: none; }
+.track-row:hover .t-play { display: block; }
+
+/* Album cover in track row */
+.t-cover {
+  width: 44px; height: 44px;
+  border-radius: 4px;
+  overflow: hidden;
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+}
+.t-cover img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.t-main { overflow: hidden; }
+.t-name { font-size: 14px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.t-sub { font-size: 12px; color: var(--muted); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.t-place { font-size: 13px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.t-year { font-size: 13px; color: var(--muted); text-align: right; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* ── RIGHT DETAIL PANEL ── */
+.detail-panel {
+  width: 0;
+  flex-shrink: 0;
+  background: var(--surface);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: width .35s cubic-bezier(.4,0,.2,1);
+  display: flex;
+  flex-direction: column;
+}
+.detail-panel.open { width: var(--detail-width); }
+.detail-close {
+  position: absolute;
+  top: 12px; right: 12px;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.1);
+  border: none; cursor: pointer;
+  color: var(--muted);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+  transition: background .15s, color .15s;
+  z-index: 5;
+}
+.detail-close:hover { background: rgba(255,255,255,.2); color: var(--text); }
+.detail-inner {
+  width: var(--detail-width);
+  height: 100%;
+  overflow-y: auto;
+  padding: 0 0 24px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.detail-inner::-webkit-scrollbar { width: 4px; }
+.detail-inner::-webkit-scrollbar-thumb { background: var(--faint); border-radius: 2px; }
+
+.detail-img {
+  width: 100%;
+  aspect-ratio: 1;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 80px;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+}
+.detail-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.detail-img-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom, transparent 40%, var(--surface) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+.detail-body { padding: 16px 20px 0; flex: 1; }
+.detail-tag {
+  font-size: 10px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1.5px;
+  color: var(--green); margin-bottom: 6px;
+}
+.detail-title { font-size: 18px; font-weight: 800; line-height: 1.2; margin-bottom: 4px; }
+.detail-company {
+  font-size: 13px; color: var(--muted);
+  margin-bottom: 16px;
+  display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
+}
+.detail-year-badge {
+  background: var(--surface2);
+  border-radius: 20px;
+  padding: 2px 10px;
+  font-size: 11px; font-weight: 700; color: var(--text);
+}
+.detail-divider { height: 1px; background: rgba(255,255,255,.08); margin: 12px 0; }
+.detail-text { font-size: 13px; line-height: 1.65; color: rgba(255,255,255,.8); }
+.detail-text p { margin-bottom: 10px; }
+.detail-text p:last-child { margin-bottom: 0; }
+.detail-highlight {
+  background: rgba(29,185,84,.12);
+  border-left: 2px solid var(--green);
+  padding: 10px 14px;
+  border-radius: 0 6px 6px 0;
+  margin: 14px 0;
+  font-size: 13px; line-height: 1.55;
+  color: rgba(255,255,255,.85);
+}
+
+/* ── PLAYER BAR ── */
+.player {
+  height: 84px;
+  background: #0a0a0a;
+  border-top: 1px solid rgba(255,255,255,.08);
+  display: flex; align-items: center;
+  padding: 0 16px; gap: 12px;
+  flex-shrink: 0;
+}
+.now-wrap { display: flex; align-items: center; gap: 12px; width: 260px; min-width: 0; }
+.now-thumb {
+  width: 52px; height: 52px;
+  border-radius: 4px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 24px; background: var(--surface2); flex-shrink: 0;
+  cursor: pointer; transition: opacity .15s;
+  overflow: hidden;
+}
+.now-thumb:hover { opacity: .8; }
+.now-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.now-info { overflow: hidden; }
+.now-title { font-size: 13px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.now-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+.player-mid { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.p-ctrls { display: flex; align-items: center; gap: 18px; }
+.p-btn {
+  background: none; border: none;
+  color: var(--muted); cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: color .15s; padding: 4px;
+}
+.p-btn:hover { color: var(--text); }
+.p-btn:disabled { opacity: .3; cursor: default; }
+.p-play {
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  background: #fff; border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  color: #000; transition: transform .1s;
+}
+.p-play:hover { transform: scale(1.08); }
+.p-bar-wrap { display: flex; align-items: center; gap: 10px; width: 100%; max-width: 460px; }
+.p-time { font-size: 11px; color: var(--muted); min-width: 34px; text-align: center; font-variant-numeric: tabular-nums; }
+.p-bar {
+  flex: 1; height: 4px;
+  background: var(--faint); border-radius: 2px;
+  position: relative; cursor: pointer;
+}
+.p-fill { position: absolute; top: 0; left: 0; height: 100%; width: 0%; background: var(--muted); border-radius: 2px; pointer-events: none; }
+.p-dot { position: absolute; top: 50%; transform: translate(-50%,-50%); width: 12px; height: 12px; border-radius: 50%; background: #fff; opacity: 0; transition: opacity .15s; pointer-events: none; }
+.p-bar:hover .p-fill { background: var(--green); }
+.p-bar:hover .p-dot { opacity: 1; }
+
+.now-panel-btn {
+  background: none; border: none;
+  color: var(--muted); cursor: pointer;
+  padding: 6px; border-radius: 4px;
+  transition: color .15s, background .15s;
+  display: flex; align-items: center;
+}
+.now-panel-btn:hover { color: var(--text); background: rgba(255,255,255,.08); }
+.now-panel-btn.active { color: var(--green); }
+
+.player-right { width: 220px; display: flex; align-items: center; justify-content: flex-end; gap: 8px; }
+.vol-bar { width: 90px; height: 4px; background: var(--faint); border-radius: 2px; cursor: pointer; }
+.vol-fill { height: 100%; width: 70%; background: var(--muted); border-radius: 2px; }
+.vol-bar:hover .vol-fill { background: var(--green); }
+
+@keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+.fade-up { animation: fadeUp .3s ease both; }
+@keyframes slideIn { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
+.slide-in { animation: slideIn .3s ease both; }
+
+/* ── MOBILE BOTTOM NAV ── */
+.mobile-nav {
+  display: none;
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  background: #0a0a0a;
+  border-top: 1px solid rgba(255,255,255,.08);
+  z-index: 100;
+  height: 64px;
+  padding: 0 8px;
+  align-items: stretch;
+}
+.mobile-nav-btn {
+  flex: 1;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 4px;
+  background: none; border: none;
+  color: var(--muted);
+  font-size: 10px; font-weight: 600;
+  cursor: pointer;
+  transition: color .15s;
+  padding: 0;
+}
+.mobile-nav-btn.active { color: var(--text); }
+.mobile-nav-btn svg { flex-shrink: 0; }
+
+/* ── MOBILE DETAIL OVERLAY ── */
+.detail-panel.mobile-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100% !important;
+  z-index: 200;
+  border-radius: 0;
+  overflow-y: auto;
+}
+.detail-panel.mobile-overlay .detail-inner {
+  width: 100%;
+}
+
+/* ── TABLET (≤ 900px) ── */
+@media (max-width: 900px) {
+  :root { --sidebar: 200px; --detail-width: 280px; }
+
+  .hero-name { font-size: 38px; }
+  .hero-title { font-size: 32px; }
+  .hero-art-pl { width: 150px; height: 150px; font-size: 60px; }
+
+  .track-header,
+  .track-row {
+    grid-template-columns: 32px 44px 1fr 100px;
+  }
+  .track-header > *:last-child,
+  .track-row .t-year { display: none; }
+
+  .now-wrap { width: 180px; }
+  .player-right { width: 140px; }
+}
+
+/* ── SMALL TABLET / LARGE PHONE (≤ 680px) ── */
+@media (max-width: 680px) {
+  body { overflow: hidden; }
+
+  .app {
+    padding: 0;
+    gap: 0;
+    height: calc(100vh - 64px - 64px); /* minus player bar and mobile nav */
+  }
+
+  /* Hide sidebar entirely on mobile */
+  .sidebar { display: none; }
+
+  .main {
+    border-radius: 0;
+    height: 100%;
+    flex: 1;
+  }
+
+  .content { overflow-y: auto; height: 100%; }
+
+  /* Player bar adjustments */
+  .player {
+    height: 64px;
+    padding: 0 12px;
+    gap: 8px;
+    position: fixed;
+    bottom: 64px;
+    left: 0; right: 0;
+    z-index: 90;
+  }
+
+  /* Push app content up so player + nav don't overlap */
+  body { padding-bottom: 128px; overflow: auto; height: auto; }
+  .app { height: auto; min-height: calc(100vh - 128px); }
+
+  .now-wrap { width: auto; flex: 1; min-width: 0; }
+  .player-mid { display: none; }
+  .player-right { width: auto; }
+
+  /* Show mobile bottom nav */
+  .mobile-nav { display: flex; }
+
+  /* Hero banner smaller */
+  .hero-banner { height: 200px; }
+  .hero-banner-inner { padding: 24px 16px 20px; }
+  .hero-name { font-size: 30px; letter-spacing: -1px; }
+  .hero-sub { font-size: 13px; }
+
+  /* Home greeting */
+  .home-greeting { padding: 14px 16px 4px; font-size: 17px; }
+  .section { padding: 8px 16px 20px; }
+  .sec-title { font-size: 17px; }
+
+  .quick-grid { grid-template-columns: repeat(2, 1fr); }
+  .card-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .card { padding: 12px; }
+  .card-art { font-size: 36px; }
+  .card-name { font-size: 12px; }
+  .card-desc { font-size: 11px; }
+
+  /* Playlist view */
+  .pl-hero {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 60px 16px 16px;
+    gap: 14px;
+  }
+  .hero-art-pl { width: 110px; height: 110px; font-size: 44px; }
+  .hero-title { font-size: 24px; letter-spacing: -0.5px; }
+  .hero-type { font-size: 10px; }
+  .hero-meta { font-size: 12px; }
+
+  .pl-toolbar { padding: 12px 16px; gap: 14px; }
+  .toolbar-desc { font-size: 12px; }
+
+  .track-table { padding: 0 8px; }
+  .track-header,
+  .track-row {
+    grid-template-columns: 28px 40px 1fr;
+    gap: 8px;
+    padding: 6px 8px;
+  }
+  /* Hide place and year columns on mobile */
+  .track-header > *:nth-child(4),
+  .track-header > *:nth-child(5),
+  .track-row .t-place,
+  .track-row .t-year { display: none; }
+
+  .t-name { font-size: 13px; }
+  .t-sub { font-size: 11px; }
+  .t-cover { width: 40px; height: 40px; }
+
+  /* Detail panel as full-screen overlay on mobile */
+  .detail-panel.open {
+    position: fixed;
+    inset: 0;
+    width: 100% !important;
+    z-index: 200;
+    border-radius: 0;
+    overflow-y: auto;
+    bottom: 64px; /* above mobile nav */
+  }
+  .detail-panel.open .detail-inner {
+    width: 100%;
+    height: 100%;
+  }
+  .detail-inner { padding-bottom: 32px; }
+
+  /* Topbar */
+  .top-user { display: none; }
+  .topbar { padding: 10px 12px; }
+}
+
+/* ── VERY SMALL PHONES (≤ 380px) ── */
+@media (max-width: 380px) {
+  .hero-name { font-size: 24px; }
+  .card-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .quick-grid { grid-template-columns: 1fr 1fr; }
+  .hero-art-pl { width: 80px; height: 80px; font-size: 32px; }
+  .hero-title { font-size: 20px; }
+}
+</style>
+</head>
+<body>
+
+<div class="app">
+
+  <!-- LEFT SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-top">
+      <nav>
+        <div class="nav-link active" id="nav-home" onclick="showHome()">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12.5 3.247a1 1 0 0 0-1 0L4 7.577V20h4.5v-6h7V20H20V7.577l-7.5-4.33zm-2-1.732a3 3 0 0 1 3 0l7.5 4.33a2 2 0 0 1 1 1.732V21a1 1 0 0 1-1 1H15a1 1 0 0 1-1-1v-6h-4v6a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7.577a2 2 0 0 1 1-1.732l7.5-4.33z"/></svg>
+          Startseite
+        </div>
+      </nav>
+    </div>
+    <div class="sidebar-lib">
+      <div class="lib-heading">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M3 22a1 1 0 0 1-1-1V3a1 1 0 0 1 2 0v18a1 1 0 0 1-1 1zM15.5 2.134A1 1 0 0 0 14 3v18a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V6.464a1 1 0 0 0-.5-.866l-6-3.464zM9 2a1 1 0 0 0-1 1v18a1 1 0 0 0 2 0V3a1 1 0 0 0-1-1z"/></svg>
+        Deine Bibliothek
+      </div>
+      <div id="sidebar-list"></div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+    <div class="topbar">
+      <div class="topbar-btns">
+        <button class="top-btn" onclick="goBack()">&#8592;</button>
+      </div>
+      <div class="top-user">
+        <div class="user-av">DM</div>
+        Dinio Maag
+      </div>
+    </div>
+
+    <div class="content" id="content">
+
+      <!-- HOME VIEW -->
+      <div id="view-home">
+        <!-- HERO BANNER -->
+        <div class="hero-banner" id="hero-banner">
+          <!-- banner.jpg — wird per JS geladen, Fallback-Gradient bleibt solange sichtbar -->
+          <img
+            id="hero-banner-img"
+            class="hero-banner-img"
+            alt=""
+          >
+          <!-- Fallback-Deko: nur sichtbar wenn kein Bild geladen -->
+          <div class="hero-deco" style="width:400px;height:400px;background:#1DB954;top:-100px;right:-80px;"></div>
+          <div class="hero-deco" style="width:280px;height:280px;background:#0f3460;bottom:-60px;left:40px;"></div>
+          <div class="hero-deco" style="width:180px;height:180px;background:#e94560;top:40px;left:200px;"></div>
+          <div class="hero-banner-inner">
+            <div class="hero-tag">Offen f&uuml;r Arbeit</div>
+            <div class="hero-name">Dinio Maag</div>
+            <div class="hero-sub">Musikbusiness &amp; Management &nbsp;&middot;&nbsp; Popakademie Baden-W&uuml;rttemberg</div>
+          </div>
+        </div>
+
+        <div class="home-greeting" id="greeting">Guten Tag &#128075;</div>
+        <div class="section">
+          <div class="sec-title">Mein Lebenslauf</div>
+          <div class="card-grid" id="card-grid"></div>
+        </div>
+      </div>
+
+      <!-- PLAYLIST VIEW -->
+      <div id="view-playlist" class="hidden">
+        <div class="pl-hero" id="pl-hero">
+          <div class="hero-art-pl" id="hero-art"><span id="hero-art-emoji"></span></div>
+          <div class="hero-info">
+            <div class="hero-type">Lebenslauf &middot; Playlist</div>
+            <div class="hero-title" id="hero-title"></div>
+            <div class="hero-meta" id="hero-meta"></div>
+          </div>
+        </div>
+        <div class="pl-toolbar">
+          <button class="play-big" onclick="playFirst()">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="black"><polygon points="5,3 19,12 5,21"/></svg>
+          </button>
+          <span class="toolbar-desc" id="toolbar-desc"></span>
+        </div>
+        <div class="track-table">
+          <div class="track-header">
+            <div>#</div>
+            <div></div>
+            <div>Titel</div>
+            <div>Institution / Ort</div>
+            <div style="text-align:right">Zeitraum</div>
+          </div>
+          <div id="track-body"></div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- RIGHT DETAIL PANEL -->
+  <div class="detail-panel" id="detail-panel">
+    <div class="detail-inner" id="detail-inner"></div>
+  </div>
+
+</div>
+
+<!-- MOBILE BOTTOM NAV -->
+<nav class="mobile-nav" id="mobile-nav">
+  <button class="mobile-nav-btn active" id="mob-btn-home" onclick="showHome(); setMobileNav('home')">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12.5 3.247a1 1 0 0 0-1 0L4 7.577V20h4.5v-6h7V20H20V7.577l-7.5-4.33zm-2-1.732a3 3 0 0 1 3 0l7.5 4.33a2 2 0 0 1 1 1.732V21a1 1 0 0 1-1 1H15a1 1 0 0 1-1-1v-6h-4v6a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7.577a2 2 0 0 1 1-1.732l7.5-4.33z"/></svg>
+    Start
+  </button>
+  <button class="mobile-nav-btn" id="mob-btn-lib" onclick="openMobileLibrary()">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M3 22a1 1 0 0 1-1-1V3a1 1 0 0 1 2 0v18a1 1 0 0 1-1 1zM15.5 2.134A1 1 0 0 0 14 3v18a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V6.464a1 1 0 0 0-.5-.866l-6-3.464zM9 2a1 1 0 0 0-1 1v18a1 1 0 0 0 2 0V3a1 1 0 0 0-1-1z"/></svg>
+    Bibliothek
+  </button>
+  <button class="mobile-nav-btn" id="mob-btn-detail" onclick="toggleDetailPanel()" style="display:none">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+    Details
+  </button>
+</nav>
+
+<!-- MOBILE LIBRARY SHEET -->
+<div id="mobile-lib-sheet" style="display:none;position:fixed;inset:0;z-index:300;background:var(--surface);bottom:128px;overflow-y:auto;padding:16px;top:0;">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+    <div style="font-size:18px;font-weight:800;">Deine Bibliothek</div>
+    <button onclick="closeMobileLibrary()" style="background:none;border:none;color:var(--muted);font-size:22px;cursor:pointer;padding:4px;">&#10005;</button>
+  </div>
+  <div id="mobile-lib-list"></div>
+</div>
+
+<!-- PLAYER BAR -->
+<div class="player">
+  <div class="now-wrap">
+    <div class="now-thumb" id="now-thumb" onclick="toggleDetailFromPlayer()" title="Details anzeigen">&#127925;</div>
+    <div class="now-info">
+      <div class="now-title" id="now-title">Kein Titel ausgew&auml;hlt</div>
+      <div class="now-sub" id="now-sub">&mdash;</div>
+    </div>
+  </div>
+  <div class="player-mid">
+    <div class="p-ctrls">
+      <button class="p-btn" id="btn-prev" onclick="prevTrack()" title="Zur&uuml;ck">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="19,20 9,12 19,4"/><line x1="5" y1="4" x2="5" y2="20" stroke="currentColor" stroke-width="2"/></svg>
+      </button>
+      <button class="p-play" onclick="togglePlay()">
+        <svg id="icon-play" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+        <svg id="icon-pause" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" class="hidden"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+      </button>
+      <button class="p-btn" id="btn-next" onclick="nextTrack()" title="Weiter">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,4 15,12 5,20"/><line x1="19" y1="4" x2="19" y2="20" stroke="currentColor" stroke-width="2"/></svg>
+      </button>
+    </div>
+    <div class="p-bar-wrap">
+      <span class="p-time" id="t-now">0:00</span>
+      <div class="p-bar" id="p-bar" onclick="scrub(event)">
+        <div class="p-fill" id="p-fill"></div>
+        <div class="p-dot" id="p-dot"></div>
+      </div>
+      <span class="p-time" id="t-total">0:00</span>
+    </div>
+  </div>
+  <div class="player-right">
+    <button class="now-panel-btn" id="panel-toggle-btn" onclick="toggleDetailPanel()" title="Details einblenden">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"/></svg>
+    </button>
+
+  </div>
+</div>
+
+<script>
+// ─────────────────────────────────────────────────────────────────
+//  DATA
+//  Each track has:
+//    cover: null  →  shows the playlist emoji as fallback
+//    cover: "my-image.jpg"  →  shows that image as album art
+//    (same applies to playlist.image for the big playlist cover)
+// ─────────────────────────────────────────────────────────────────
+var PLAYLISTS = [
+
+  // ── 1. BILDUNG ──────────────────────────────────────────────────
+  {
+    id: "bildung",
+    name: "Bildung",
+    emoji: "\uD83C\uDF93",
+    image: "images/cover-bildung.jpg",
+    color: "#1e3a5f",
+    desc: "Studium, Schulabschluss & Weiterbildungen",
+    tracks: [
+      {
+        title: "B.A. Music Business",
+        sub: "Vollzeitstudium \u2014 Schwerpunkte: Verlag, K\u00fcnstlerentwicklung & Business Development",
+        place: "Popakademie Baden-W\u00fcrttemberg, Mannheim",
+        year: "Sept. 2024 \u2013 Aug. 2027",
+        cover: "images/track-popakademie.jpg",
+        detail: {
+          tag: "Aktuelles Studium",
+          heading: "B.A. Music Business",
+          company: "Popakademie Baden-W\u00fcrttemberg &middot; Mannheim",
+          long: "<p>Nach meiner Zeit bei Sony Music begann ich im Herbst 2024 mit dem Bachelor-Studium <strong>Music Business</strong> an der Popakademie Baden-W\u00fcrttemberg. Meine gew\u00e4hlten Schwerpunkte liegen in den Bereichen <strong>Verlag, K\u00fcnstlerentwicklung und Business Development</strong> \u2014 Themen, die mich sowohl akademisch als auch praktisch seit Jahren begleiten.</p><p>An der Popakademie bin ich als <strong>Jahrgangssprecher</strong> aktiv und engagiere mich regelm\u00e4\u00dfig bei Veranstaltungen und Projekten. Dar\u00fcber hinaus habe ich bereits einigen Kommilitonen und Freunden bei Fragen rund um K\u00fcnstlerentwicklung und Karriereplanung geholfen. Ich plane, das Studium in der Regelstudienzeit abzuschlie\u00dfen.</p>",
+          highlight: "Jahrgangssprecher &middot; 6 Semester &middot; Abschluss: B.A."
+        }
+      },
+      {
+        title: "Matura (Abitur)",
+        sub: "Realgymnasium \u2014 Maturaarbeit Musik mit H\u00f6chstnote abgeschlossen",
+        place: "Realgymnasium R\u00e4mib\u00fchl, Z\u00fcrich",
+        year: "Sept. 2015 \u2013 Juli 2021",
+        cover: "images/track-raemibuechl.jpg",
+        detail: {
+          tag: "Schulabschluss",
+          heading: "Matura (Abitur)",
+          company: "Realgymnasium R\u00e4mib\u00fchl &middot; Z\u00fcrich",
+          long: "<p>Meine schulische Ausbildung schloss ich am <strong>Realgymnasium R\u00e4mib\u00fchl</strong> in Z\u00fcrich ab.</p><p>F\u00fcr meine Maturaarbeit w\u00e4hlte ich das Fach <strong>Musik</strong> und schloss sie mit der <strong>Note 6</strong> ab (entspricht Note 1 im deutschen System) \u2014 ein fr\u00fches Zeichen meiner Leidenschaft f\u00fcr die Musikbranche.</p>",
+          highlight: "Maturaarbeit Musik &middot; Note 6 (CH) = Note 1 (DE)"
+        }
+      },
+      {
+        title: "Weitere Kurse & Zertifikate",
+        sub: "Coursera & Sony Music interne Weiterbildungen",
+        place: "Coursera / Sony Music",
+        year: "2023 \u2013 2025",
+        cover: "images/track-kurse.jpg",
+        detail: {
+          tag: "Weiterbildung",
+          heading: "Kurse & Zertifikate",
+          company: "Coursera &amp; Sony Music",
+          long: "<p>Neben Abitur und Studium habe ich mich kontinuierlich eigenst\u00e4ndig weitergebildet. \u00dcber <strong>Coursera</strong> absolvierte ich einen Kurs im Bereich <strong>Meta Ads</strong> und vertiefte parallel dazu meine Kenntnisse in <strong>Musiktheorie</strong>.</p><p>W\u00e4hrend meiner Zeit bei Sony Music nutzte ich die internen Weiterbildungsangebote und schloss folgende Kurse erfolgreich ab:</p><p>\u2014 The Record Deal<br>\u2014 Essential Licensing<br>\u2014 Essential Copyright<br>\u2014 Essential Collective Licensing<br>\u2014 Essential Rights and Revenue<br>\u2014 Essential Guide to Web3 and Blockchain</p><p>Diese Kurse gaben mir ein solides Fundament im Bereich Musikrecht, Lizenzierung und den aufkommenden Technologien rund um Web3.</p>",
+          highlight: "6 Sony Music Zertifikate &middot; Meta Ads &middot; Musiktheorie"
+        }
+      }
+    ]
+  },
+
+  // ── 2. BERUFSERFAHRUNG (ARBEITNEHMER) ───────────────────────────
+  {
+    id: "angestellt",
+    name: "Berufserfahrung (Arbeitnehmer)",
+    emoji: "\uD83D\uDCBC",
+    image: "images/cover-angestellt.jpg",
+    color: "#1a4a1a",
+    desc: "Festanstellungen, Praktika & Teilzeitstellen",
+    tracks: [
+      {
+        title: "A&R Scout",
+        sub: "Teilzeit \u2014 Scouting aufstrebender K\u00fcnstlerinnen mit Marketingpotenzial",
+        place: "Neubau Music, Teilzeit",
+        year: "M\u00e4rz 2026 \u2013 Heute",
+        cover: "images/track-neubau.jpg",
+        detail: {
+          tag: "Aktuelle Stelle",
+          heading: "A&R Scout",
+          company: "Neubau Music &middot; Teilzeit",
+          long: "<p>Seit M\u00e4rz 2026 bin ich als <strong>A&R Scout</strong> bei Neubau Music t\u00e4tig und identifiziere aufstrebende K\u00fcnstlerinnen und K\u00fcnstler mit Marketingpotenzial.</p><p>Dabei kombiniere ich gezielte <strong>Social-Media-Recherche</strong> mit eigenen Datenanalyse-Tools und Branchen-Networking, um neue Talente fr\u00fchzeitig zu entdecken und zu bewerten.</p>",
+          highlight: "Scouting &middot; Datenanalyse &middot; Branchen-Networking"
+        }
+      },
+      {
+        title: "A&R",
+        sub: "Praktikum \u2014 Label-Arbeit, Vertragsmanagement & The Voice of Germany 2025",
+        place: "Embassy of Music",
+        year: "Aug. 2025 \u2013 Okt. 2025",
+        cover: "images/track-embassy.jpg",
+        detail: {
+          tag: "Praktikum",
+          heading: "A&R Praktikant",
+          company: "Embassy of Music",
+          long: "<p>W\u00e4hrend meines Praktikums bei <strong>Embassy of Music</strong> sammelte ich Erfahrungen auf der administrativen und kreativen Seite der Label-Arbeit.</p><p>Im administrativen Bereich \u00fcbernahm ich das <strong>Produkt- und Vertrags-Setup</strong> im internen System und stellte korrekte Metadaten f\u00fcr Tracks und Releases sicher \u2014 auch f\u00fcr gro\u00dfe Projekte wie <strong>The Voice of Germany</strong>. Durch die Arbeit an GVL-Konfliktlisten gewann ich Einblicke in die rechtlichen und finanziellen Strukturen der Musikbranche.</p><p>Eine besondere Verantwortung trug ich bei der <strong>Planung der Finalsongs f\u00fcr The Voice of Germany 2025</strong>: Ich f\u00fchrte Songwriter-Briefings mit den Halbfinalisten durch, sammelte kreative Inputs und arbeitete eng mit Produzenten und Songwritern zusammen.</p><p>Dar\u00fcber hinaus nahm ich an A&R-Calls und Scouting-Sessions teil und \u00fcbernahm Verantwortung f\u00fcr Content-Shootings mit Acts wie Iskander Moon und Chris de Sarandy.</p>",
+          highlight: "The Voice of Germany 2025 &middot; A&R Scouting &middot; GVL &middot; Content-Shootings"
+        }
+      },
+      {
+        title: "KI-Recherche",
+        sub: "Teilzeit \u2014 KI-Tool-Evaluation f\u00fcr das AI Toolboard der Popakademie",
+        place: "SMIX Lab, Popakademie",
+        year: "Jan. 2025 \u2013 Juli 2025",
+        cover: "images/track-smixlab.jpg",
+        detail: {
+          tag: "Werkstudent",
+          heading: "KI-Recherche",
+          company: "SMIX Lab &middot; Popakademie Baden-W\u00fcrttemberg",
+          long: "<p>Als Teil des <strong>SMIX Labs</strong> f\u00fchrte ich umfangreiche Recherchen zu KI-Tools f\u00fcr die Musikproduktion und das Musikbusiness durch.</p><p>Ich testete eigenst\u00e4ndig eine breite Palette von Tools \u2014 von generativer Musiksoftware bis hin zu Marketing-Analytics-Plattformen \u2014 und dokumentierte St\u00e4rken, Schw\u00e4chen und Einsatzm\u00f6glichkeiten.</p><p>Gemeinsam mit dem Team entwickelte ich eine umfassende Wissensdatenbank, die als <strong>AI Toolboard</strong> \u00fcber die Website der Popakademie \u00f6ffentlich zug\u00e4nglich gemacht wurde \u2014 ein zentraler Anlaufpunkt f\u00fcr aufkommende KI-Technologien in der Musikbranche.</p>",
+          highlight: "AI Toolboard Popakademie &middot; 6 Monate &middot; \u00d6ffentlich ver\u00f6ffentlicht"
+        }
+      },
+      {
+        title: "Datenanalyse",
+        sub: "Praktikum \u2014 Streaming-Analytics, Python-Automatisierung & Tableau",
+        place: "Sony Music Switzerland, Z\u00fcrich",
+        year: "Apr. 2023 \u2013 Apr. 2024",
+        cover: "images/track-sonymusic.jpg",
+        detail: {
+          tag: "Praktikum (1 Jahr)",
+          heading: "Datenanalyse Praktikant",
+          company: "Sony Music Switzerland &middot; Z\u00fcrich",
+          long: "<p>W\u00e4hrend meines einj\u00e4hrigen Praktikums bei <strong>Sony Music Switzerland</strong> war ich Teil des Business-Development-Teams und lieferte datengetriebene Erkenntnisse und Prozessautomatisierungen.</p><p>Ich f\u00fchrte <strong>SQL-Abfragen</strong> mit DBeaver durch und entwickelte <strong>Python-Skripte</strong> (Pandas, Jupyter Notebook), um wiederkehrende Prozesse zu automatisieren und Daten aus Social-Media-APIs auszuwerten.</p><p>F\u00fcr das Reporting erstellte ich <strong>Tableau-Dashboards</strong> zur Visualisierung von Streaming-, Social-Media- und Werbeleistung sowie w\u00f6chentliche Newsletter mit Marktanteilsanalysen. Dar\u00fcber hinaus identifizierte ich Produkte mit hohem Marketingpotenzial und trug zum w\u00f6chentlichen \u201eMarketing Impact\u201c-Meeting bei.</p>",
+          highlight: "Python &middot; SQL &middot; Tableau &middot; Streaming-Analytics &middot; 1 Jahr"
+        }
+      },
+      {
+        title: "Surfcoach",
+        sub: "Teilzeit \u2014 Coaching, Bar & Events an der Citywave Z\u00fcrich",
+        place: "Urban Surf, Z\u00fcrich",
+        year: "Apr. 2022 \u2013 Sept. 2024",
+        cover: "images/track-urbansurf.jpg",
+        detail: {
+          tag: "Saisonstelle",
+          heading: "Surfcoach & Kundenbetreuung",
+          company: "Urban Surf Citywave &middot; Z\u00fcrich",
+          long: "<p>Meine Verbindung zu Urban Surf begann 2022, als ich dort zun\u00e4chst an der Bar arbeitete. In dieser Zeit hatte ich die M\u00f6glichkeit, an internen Surf-Sessions teilzunehmen und das Surfen von Grund auf zu erlernen \u2014 was mich so begeisterte, dass ich im darauffolgenden Sommer als <strong>Surfcoach</strong> angefragt wurde.</p><p>Was folgte, war einer der sch\u00f6nsten Sommer meines Lebens: Ich coachte G\u00e4ste intensiv an einer stehenden Welle und durfte meine neu gewonnene Leidenschaft direkt weitergeben. Zeitlich fiel diese Erfahrung genau in die \u00dcbergangsphase zwischen meinem Praktikum bei Sony Music und dem Beginn meines Studiums an der Popakademie \u2014 ein perfekter Moment zum Durchatmen.</p>",
+          highlight: "Surfcoach &middot; Bar &middot; Events &middot; VIP-Lounges"
+        }
+      },
+      {
+        title: "Catering & Events",
+        sub: "Teilzeit \u2014 Service, Bar & Hospitality an Konzerten & Gro\u00dfveranstaltungen",
+        place: "TEMPSTAFF, Z\u00fcrich",
+        year: "Jan. 2021 \u2013 M\u00e4rz 2024",
+        cover: "images/track-tempstaff.jpg",
+        detail: {
+          tag: "Teilzeitstelle",
+          heading: "Catering & Events",
+          company: "TEMPSTAFF &middot; Z\u00fcrich",
+          long: "<p>Durch verschiedene Teilzeitstellen in der Gastronomie, im Hospitality-Bereich und im Kundenservice habe ich ausgepr\u00e4gte zwischenmenschliche, organisatorische und l\u00f6sungsorientierte F\u00e4higkeiten entwickelt \u2014 in dynamischen, schnelllebigen Umgebungen bei Konzerten, Privatveranstaltungen, Hotels und Bars.</p><p>Einges\u00e4tze u. a. bei: <strong>Halle 622, Hallenstadion, B\u00fcrgenstock, Dolder</strong> und weiteren Veranstaltungsorten. Im direkten Kundenkontakt \u2014 u. a. im gehobenen Einzelhandel bei <strong>Bucherer</strong> \u2014 sorgte ich f\u00fcr ein erstklassiges Serviceerlebnis.</p><p>Im Bar- und Catering-Bereich \u00fcbernahm ich Aufgaben von der Vorbereitung \u00fcber den Service bis zur Qualit\u00e4tskontrolle. Diese T\u00e4tigkeiten st\u00e4rkten meine F\u00e4higkeit zum Multitasking und lehrten mich, auch unter Druck ruhig und leistungsstark zu bleiben.</p>",
+          highlight: "Hallenstadion &middot; Halle 622 &middot; B\u00fcrgenstock &middot; Dolder &middot; Bucherer"
+        }
+      }
+    ]
+  },
+
+  // ── 3. BERUFSERFAHRUNG (SELBSTSTÄNDIG) ──────────────────────────
+  {
+    id: "selbst",
+    name: "Berufserfahrung (Selbst\u00e4ndig)",
+    emoji: "\uD83D\uDE80",
+    image: "images/cover-selbst.jpg",
+    color: "#6e3a1d",
+    desc: "Artist Management, Musikprojekte & Produktion",
+    tracks: [
+      {
+        title: "Artist Management",
+        sub: "Selbst\u00e4ndig \u2014 Strategie, Marketing & Release-Management f\u00fcr Allegra",
+        place: "Selbst\u00e4ndig",
+        year: "Mai 2025 \u2013 Heute",
+        cover: "images/track-allegra.jpg",
+        detail: {
+          tag: "Aktives Projekt",
+          heading: "Artist Management",
+          company: "Allegra Tinnefeld \u2014 S\u00e4ngerin & Schauspielerin",
+          long: "<p>Als Manager der \u00f6sterreichischen S\u00e4ngerin und Schauspielerin <strong>Allegra</strong> bin ich f\u00fcr die gesamte operative und strategische Planung verantwortlich und verbinde kreative Entwicklung mit strategischem Business-Management.</p><p>Ich plane und verwalte Allegras <strong>Social-Media-Pr\u00e4senz</strong> auf Instagram und TikTok \u2014 von der Content-Strategie \u00fcber Storytelling bis hin zum Fan-Engagement. Gleichzeitig koordiniere ich die kreative Ausrichtung f\u00fcr Fotoshootings, Album-Artwork und Cover-Design, um eine konsistente visuelle Identit\u00e4t sicherzustellen. Mit diesen Ma\u00dfnahmen haben wir <strong>16.000 Follower</strong> erreicht und im ersten Jahr <strong>80.000 Streams</strong> generiert.</p><p>Den gesamten <strong>Release-Zyklus</strong> koordiniere ich von der Produktionsplanung \u00fcber Distribution und Playlist-Pitching bis hin zu PR-Outreach. Ich entwickle und setze Marketingstrategien um \u2014 darunter Social-Media-Kampagnen, Content-Erstellung und bezahlte Werbung \u2014 stets mit datenbasierter Auswertung im Blick.</p>",
+          highlight: "16.000 Follower &middot; 80.000 Streams im ersten Jahr &middot; Vollst\u00e4ndiges Management"
+        }
+      },
+      {
+        title: "Musiker",
+        sub: "Selbst\u00e4ndig \u2014 350.000+ Streams, 30.000+ TikTok-Follower (Malu Sixx / DINIO)",
+        place: "Selbst\u00e4ndig",
+        year: "Jan. 2017 \u2013 Jan. 2025",
+        cover: "images/track-dinio.jpg",
+        detail: {
+          tag: "Eigenes Projekt",
+          heading: "Songwriter & Produzent",
+          company: "Malu Sixx / DINIO \u2014 Selbst\u00e4ndig",
+          long: "<p>Als unabh\u00e4ngiger K\u00fcnstler habe ich nicht nur meine kreative Vision umgesetzt, sondern auch alle gesch\u00e4ftlichen und marketingbezogenen Prozesse selbst in die Hand genommen. Ich komponierte, nahm auf und produzierte Songs eigenst\u00e4ndig und verantwortete den gesamten Prozess von der Idee bis zur finalen Ver\u00f6ffentlichung.</p><p>Den gesamten Ver\u00f6ffentlichungsprozess steuerte ich eigenverantwortlich \u2014 von digitaler Distribution und Metadatenverwaltung bis zu Playlist-Pitching. Auf <strong>TikTok</strong> baute ich eine Fangemeinde mit \u00fcber <strong>30.000 Followern</strong> auf, durch konsistentes Storytelling und authentische Content-Erstellung. Insgesamt f\u00fchrten diese Ma\u00dfnahmen zu \u00fcber <strong>350.000 Spotify-Streams</strong>.</p><p>Begonnen hatte alles unter dem Projektnamen <em>Malu Sixx</em>. Als ich mich mit der musikalischen Ausrichtung nicht mehr identifizieren konnte, entschied ich mich, dieses Kapitel abzuschlie\u00dfen und fortan unter meinem eigenen Namen <strong>DINIO</strong> weiterzumachen \u2014 rein hobbyma\u00dfig und aus Freude an der Musik.</p><p>R\u00fcckblickend bin ich sehr dankbar f\u00fcr diese Zeit \u2014 ich kann bis heute aus der Perspektive eines K\u00fcnstlers denken, was mir in meiner Arbeit einen entscheidenden Vorteil verschafft. Ich kenne die Sprache der Produktion, verstehe Musiktheorie und Songwriting und wei\u00df aus eigener Erfahrung, welche Herausforderungen f\u00fcr unabh\u00e4ngige Musiker entstehen.</p>",
+          highlight: "350.000+ Streams &middot; 30.000+ TikTok-Follower &middot; DIY-Marketing"
+        }
+      },
+      {
+        title: "Produzent",
+        sub: "Selbst\u00e4ndig \u2014 Produktion & Mixing, inkl. Beitrag f\u00fcr The Voice Kids",
+        place: "Selbst\u00e4ndig",
+        year: "Jan. 2017 \u2013 Jan. 2025",
+        cover: "images/track-produktion.jpg",
+        detail: {
+          tag: "Freelance",
+          heading: "Musikproduktion & Mixing",
+          company: "Freelance \u2014 Selbst\u00e4ndig",
+          long: "<p>Parallel zu meinen eigenen Projekten habe ich meine Produktionskenntnisse auch f\u00fcr bezahlte Auftr\u00e4ge eingesetzt. Der Gro\u00dfteil meiner Arbeit richtete sich an <strong>Amateurmusiker</strong>, denen ich bei der Produktion und dem Abmischen ihrer Songs half.</p><p>Der bisher gr\u00f6\u00dfte Auftrag in diesem Bereich f\u00fchrte mich zur <strong>Produktion eines Beitrags f\u00fcr The Voice Kids</strong>.</p>",
+          highlight: "The Voice Kids Beitrag &middot; 8+ Jahre Erfahrung &middot; FL Studio"
+        }
+      }
+    ]
+  },
+
+  // ── 4. SKILLS ────────────────────────────────────────────────────
+  {
+    id: "hardskills",
+    name: "Hard Skills",
+    emoji: "\uD83D\uDCCA",
+    image: "images/cover-hardskills.jpg",
+    color: "#1d5f5f",
+    desc: "Technische & fachliche Kompetenzen",
+    tracks: [
+      {
+        title: "Marketing & Ads",
+        sub: "Meta Ads Manager, TikTok Ads, Paid Social \u2014 aus Praxis & eigenem Einsatz",
+        place: "Hard Skill",
+        year: "Fortgeschritten",
+        cover: "images/track-marketing.jpg",
+        detail: {
+          tag: "Hard Skill",
+          heading: "Marketing & Paid Ads",
+          company: "Meta &middot; TikTok &middot; Paid Social",
+          long: "<p>\u2014 Meta Ads Manager (Facebook & Instagram)<br>\u2014 TikTok Ads Manager<br>\u2014 Kampagnenplanung & Budgetverwaltung<br>\u2014 Zielgruppen-Targeting & Retargeting<br>\u2014 Performance-Auswertung & Optimierung<br>\u2014 Content Creation f\u00fcr bezahlte Anzeigen</p>",
+          highlight: "Eingesetzt f\u00fcr eigene Musikprojekte & Artist Management"
+        }
+      },
+      {
+        title: "Datenanalyse",
+        sub: "Python, SQL, Tableau \u2014 Streaming, Social Media & Kampagnen",
+        place: "Hard Skill",
+        year: "Fortgeschritten",
+        cover: "images/track-datenanalyse.jpg",
+        detail: {
+          tag: "Hard Skill",
+          heading: "Datenanalyse & Visualisierung",
+          company: "Python &middot; SQL &middot; Tableau",
+          long: "<p>\u2014 Python (Pandas, Jupyter Notebook) f\u00fcr Prozessautomatisierung<br>\u2014 SQL-Datenbankabfragen (DBeaver)<br>\u2014 Tableau-Dashboards zur Datenvisualisierung<br>\u2014 Streaming-Analytics (Spotify, Apple Music)<br>\u2014 Social-Media-API-Auswertungen<br>\u2014 Kampagnen-Performance-Analyse</p>",
+          highlight: "Praxiserfahrung bei Sony Music Switzerland &middot; 1 Jahr"
+        }
+      },
+      {
+        title: "Projektmanagement",
+        sub: "Operative & strategische Planung, Release-Koordination & Teamf\u00fchrung",
+        place: "Hard Skill",
+        year: "Fortgeschritten",
+        cover: "images/track-projektmanagement.jpg",
+        detail: {
+          tag: "Hard Skill",
+          heading: "Projektmanagement",
+          company: "Operative & strategische Planung",
+          long: "<p>\u2014 Release-Koordination & Zeitplanung<br>\u2014 Teamkommunikation & Briefings<br>\u2014 Koordination von Produzenten, Songwritern & K\u00fcnstlern<br>\u2014 Strategieentwicklung & Controlling<br>\u2014 Prozessoptimierung</p>",
+          highlight: "Eingesetzt bei Embassy of Music, Sony Music & Artist Management"
+        }
+      },
+      {
+        title: "Prozessautomatisierung",
+        sub: "Python-Skripte & Workflows zur Effizienzsteigerung",
+        place: "Hard Skill",
+        year: "Fortgeschritten",
+        cover: "images/track-automatisierung.jpg",
+        detail: {
+          tag: "Hard Skill",
+          heading: "Prozessautomatisierung",
+          company: "Python &middot; Scripting &middot; Workflows",
+          long: "<p>\u2014 Python-Skripterstellung (Pandas, Jupyter)<br>\u2014 Automatisierung wiederkehrender Reporting-Prozesse<br>\u2014 Datenaufbereitung & -transformation<br>\u2014 API-Anbindungen (Social Media, Streaming)</p>",
+          highlight: "Eingesetzt bei Sony Music Switzerland"
+        }
+      },
+      {
+        title: "Content Creation",
+        sub: "Video, Foto & Social-Media-Content \u2014 Capcut, Photoshop & FL Studio",
+        place: "Hard Skill",
+        year: "Fortgeschritten",
+        cover: "images/track-contentcreation.jpg",
+        detail: {
+          tag: "Hard Skill",
+          heading: "Content Creation",
+          company: "Capcut &middot; Adobe Photoshop &middot; FL Studio",
+          long: "<p>\u2014 Videobearbeitung & Reels (Capcut)<br>\u2014 Bildbearbeitung & Grafik (Adobe Photoshop)<br>\u2014 Musikproduktion & Mixing (FL Studio)<br>\u2014 Social-Media-Content f\u00fcr Instagram & TikTok<br>\u2014 Album-Artwork & Cover-Design</p>",
+          highlight: "F\u00fcr eigene Projekte & Artist Management eingesetzt"
+        }
+      }
+    ]
+  },
+  {
+    id: "softskills",
+    name: "Soft Skills & Sprachen",
+    emoji: "\uD83C\uDF1F",
+    image: "images/cover-softskills.jpg",
+    color: "#6e1d1d",
+    desc: "Pers\u00f6nlichkeit, soziale Kompetenzen & Sprachkenntnisse",
+    tracks: [
+      {
+        title: "Pers\u00f6nlichkeit",
+        sub: "Extrovertiert, belastbar, organisiert & technikaffin",
+        place: "Soft Skills",
+        year: "",
+        cover: "images/track-persoenlichkeit.jpg",
+        detail: {
+          tag: "Soft Skills",
+          heading: "Pers\u00f6nliche St\u00e4rken",
+          company: "Charakter & Arbeitsweise",
+          long: "<p>\u2014 Extrovertiert<br>\u2014 Belastbar<br>\u2014 Organisiert & zuverl\u00e4ssig<br>\u2014 Hochmotiviert<br>\u2014 Technikaffin<br>\u2014 Wissensdurstig</p>",
+          highlight: "Von Sony Music & Urban Surf in Arbeitszeugnissen best\u00e4tigt"
+        }
+      },
+      {
+        title: "Sprachen",
+        sub: "Deutsch (Muttersprache), Englisch C1, Franz\u00f6sisch B1, Italienisch (Basics)",
+        place: "Sprachkenntnisse",
+        year: "",
+        cover: "images/track-sprachen.jpg",
+        detail: {
+          tag: "Sprachen",
+          heading: "Sprachkenntnisse",
+          company: "Mehrsprachig",
+          long: "<p>\u2014 <strong>Deutsch</strong> \u2014 Muttersprache (inkl. Schweizerdeutsch)<br>\u2014 <strong>Englisch</strong> \u2014 C1, flie\u00dfend in Wort und Schrift<br>\u2014 <strong>Franz\u00f6sisch</strong> \u2014 B1<br>\u2014 <strong>Italienisch</strong> \u2014 Grundkenntnisse</p>",
+          highlight: "Englisch t\u00e4glich eingesetzt bei Sony Music Switzerland"
+        }
+      }
+    ]
+  }
+];
+
+// ─────────────────────────────────────────────────────────────────
+//  STATE
+// ─────────────────────────────────────────────────────────────────
+var state = { view: 'home', playlist: null, trackIdx: null, playing: false, progress: 0, timer: null, detailOpen: false };
+
+// ─────────────────────────────────────────────────────────────────
+//  HELPERS — render image or emoji fallback
+// ─────────────────────────────────────────────────────────────────
+function coverHTML(src, emoji, extraStyle) {
+  // src = image path or null; emoji = fallback emoji string; extraStyle = inline styles for wrapper
+  if (src) {
+    return '<img src="' + src + '" alt="" onerror="this.style.display=\'none\'">';
+  }
+  return '<span style="' + (extraStyle || '') + '">' + emoji + '</span>';
+}
+
+// ─────────────────────────────────────────────────────────────────
+//  INIT
+// ─────────────────────────────────────────────────────────────────
+function init() {
+  // Banner laden
+  var bannerImg = document.getElementById('hero-banner-img');
+  bannerImg.onerror = function() { this.style.display = 'none'; };
+  bannerImg.src = 'images/banner.jpg';
+  setGreeting();
+  renderSidebar();
+  renderHome();
+}
+
+function setGreeting() {
+  var h = new Date().getHours();
+  var msg = h < 12 ? "Guten Morgen" : h < 18 ? "Guten Tag" : "Guten Abend";
+  document.getElementById('greeting').textContent = msg + " \uD83D\uDC4B";
+}
+
+// ─────────────────────────────────────────────────────────────────
+//  RENDER SIDEBAR
+// ─────────────────────────────────────────────────────────────────
+function renderSidebar() {
+  var html = '';
+  for (var i = 0; i < PLAYLISTS.length; i++) {
+    var p = PLAYLISTS[i];
+    var thumbContent = p.image
+      ? '<img src="' + p.image + '" alt="" onerror="this.style.display=\'none\';this.insertAdjacentText(\'afterend\',\'' + p.emoji + '\')">'
+      : p.emoji;
+    html += '<div class="pl-item" id="si-' + p.id + '" onclick="openPlaylist(\'' + p.id + '\')">' +
+      '<div class="pl-thumb" style="background:linear-gradient(135deg,' + p.color + ' 0%,' + p.color + '66 100%)">' + thumbContent + '</div>' +
+      '<div class="pl-label"><div class="pl-name">' + p.name + '</div><div class="pl-meta">Playlist &middot; ' + p.tracks.length + ' Eintr&auml;ge</div></div>' +
+    '</div>';
+  }
+  document.getElementById('sidebar-list').innerHTML = html;
+}
+
+// ─────────────────────────────────────────────────────────────────
+//  RENDER HOME
+// ─────────────────────────────────────────────────────────────────
+function renderHome() {
+  var chtml = '';
+  for (var i = 0; i < PLAYLISTS.length; i++) {
+    var p = PLAYLISTS[i];
+    var grad = 'linear-gradient(135deg,' + p.color + ' 0%,' + p.color + '55 100%)';
+    var artContent = p.image
+      ? '<img src="' + p.image + '" alt="" onerror="this.style.display=\'none\'">' + '<span class="card-art-emoji">' + p.emoji + '</span>'
+      : '<span class="card-art-emoji">' + p.emoji + '</span>';
+    chtml += '<div class="card" onclick="openPlaylist(\'' + p.id + '\')">' +
+      '<div class="card-art" style="background:' + grad + '">' + artContent +
+        '<button class="play-fab" onclick="event.stopPropagation();openAndPlay(\'' + p.id + '\')">' +
+          '<svg width="20" height="20" viewBox="0 0 24 24" fill="black"><polygon points="5,3 19,12 5,21"/></svg>' +
+        '</button>' +
+      '</div>' +
+      '<div class="card-name">' + p.name + '</div>' +
+      '<div class="card-desc">' + p.desc + '</div>' +
+    '</div>';
+  }
+  document.getElementById('card-grid').innerHTML = chtml;
+}
+
+// ─────────────────────────────────────────────────────────────────
+//  OPEN PLAYLIST
+// ─────────────────────────────────────────────────────────────────
+function openAndPlay(id) { openPlaylist(id); playFirst(); }
+
+function openPlaylist(id) {
+  var pl = null;
+  for (var i = 0; i < PLAYLISTS.length; i++) { if (PLAYLISTS[i].id === id) { pl = PLAYLISTS[i]; break; } }
+  if (!pl) return;
+  state.playlist = pl;
+
+  var items = document.querySelectorAll('.pl-item');
+  for (var j = 0; j < items.length; j++) items[j].classList.remove('active');
+  var si = document.getElementById('si-' + id);
+  if (si) si.classList.add('active');
+  document.getElementById('nav-home').classList.remove('active');
+
+  // Hero
+  document.getElementById('pl-hero').style.background = 'linear-gradient(160deg,' + pl.color + ' 0%,#181818 70%)';
+  var artEl = document.getElementById('hero-art');
+  artEl.style.background = 'linear-gradient(135deg,' + pl.color + ' 0%,' + pl.color + '66 100%)';
+  var emojiEl = document.getElementById('hero-art-emoji');
+  if (pl.image) {
+    emojiEl.textContent = '';
+    // inject img if not already there
+    var existing = artEl.querySelector('img.hero-img');
+    if (!existing) {
+      var img = document.createElement('img');
+      img.className = 'hero-img';
+      img.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover';
+      img.src = pl.image;
+      artEl.insertBefore(img, emojiEl);
+    } else { existing.src = pl.image; }
+  } else {
+    var oldImg = artEl.querySelector('img.hero-img');
+    if (oldImg) oldImg.remove();
+    emojiEl.textContent = pl.emoji;
+  }
+
+  document.getElementById('hero-title').textContent = pl.name;
+  document.getElementById('hero-meta').innerHTML = '<strong>Dinio Maag</strong> &middot; ' + pl.tracks.length + ' Eintr&auml;ge';
+  document.getElementById('toolbar-desc').textContent = pl.desc;
+
+  // Tracks
+  var tbody = '';
+  for (var k = 0; k < pl.tracks.length; k++) {
+    var t = pl.tracks[k];
+    var coverContent = t.cover
+      ? '<img src="' + t.cover + '" alt="" onerror="this.style.display=\'none\'">'
+      : '<span style="font-size:20px">' + pl.emoji + '</span>';
+    tbody +=
+      '<div class="track-row" id="tr-' + id + '-' + k + '" onclick="playTrack(' + k + ')">' +
+        '<div class="t-idx"><span class="t-num">' + (k+1) + '</span><span class="t-play">&#9654;</span></div>' +
+        '<div class="t-cover" style="background:linear-gradient(135deg,' + pl.color + ',' + pl.color + '55)">' + coverContent + '</div>' +
+        '<div class="t-main"><div class="t-name">' + t.title + '</div><div class="t-sub">' + t.sub + '</div></div>' +
+        '<div class="t-place">' + t.place + '</div>' +
+        '<div class="t-year">' + t.year + '</div>' +
+      '</div>';
+  }
+  document.getElementById('track-body').innerHTML = tbody;
+  updateNavButtons();
+  showView('playlist');
+}
+
+// ─────────────────────────────────────────────────────────────────
+//  PLAY CONTROLS
+// ─────────────────────────────────────────────────────────────────
+function playFirst() {
+  if (state.playlist && state.playlist.tracks.length > 0) playTrack(0);
+}
+
+function playTrack(idx) {
+  var pl = state.playlist;
+  if (!pl) return;
+  var t = pl.tracks[idx];
+  if (!t) return;
+  state.trackIdx = idx;
+
+  // Player bar thumbnail
+  var thumb = document.getElementById('now-thumb');
+  if (t.cover) {
+    thumb.innerHTML = '<img src="' + t.cover + '" alt="" onerror="this.innerHTML=\'' + pl.emoji + '\'">';
+  } else {
+    thumb.innerHTML = pl.emoji;
+  }
+  thumb.style.background = 'linear-gradient(135deg,' + pl.color + ',' + pl.color + '88)';
+
+  document.getElementById('now-title').textContent = t.title;
+  document.getElementById('now-sub').textContent = t.place;
+
+  // Highlight row
+  var rows = document.querySelectorAll('.track-row');
+  for (var i = 0; i < rows.length; i++) rows[i].classList.remove('playing');
+  var row = document.getElementById('tr-' + pl.id + '-' + idx);
+  if (row) {
+    row.classList.add('playing');
+    // Scroll into view smoothly
+    row.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  openDetailPanel(pl, t);
+  updateNavButtons();
+  startProgress();
+}
+
+function nextTrack() {
+  var pl = state.playlist;
+  if (!pl) return;
+  var next = (state.trackIdx !== null ? state.trackIdx : -1) + 1;
+  if (next < pl.tracks.length) playTrack(next);
+}
+
+function prevTrack() {
+  var pl = state.playlist;
+  if (!pl) return;
+  var prev = (state.trackIdx !== null ? state.trackIdx : 1) - 1;
+  if (prev >= 0) playTrack(prev);
+}
+
+function updateNavButtons() {
+  var pl = state.playlist;
+  var idx = state.trackIdx;
+  var prevBtn = document.getElementById('btn-prev');
+  var nextBtn = document.getElementById('btn-next');
+  if (!pl) { prevBtn.disabled = true; nextBtn.disabled = true; return; }
+  prevBtn.disabled = (idx === null || idx <= 0);
+  nextBtn.disabled = (idx === null || idx >= pl.tracks.length - 1);
+}
+
+// ─────────────────────────────────────────────────────────────────
+//  DETAIL PANEL
+// ─────────────────────────────────────────────────────────────────
+function openDetailPanel(pl, track) {
+  var d = track.detail;
+  if (!d) return;
+
+  var imgContent = track.cover
+    ? '<img src="' + track.cover + '" alt="">'
+    : '<span style="font-size:90px;position:relative;z-index:1">' + pl.emoji + '</span>';
+
+  var html =
+    '<div style="position:relative">' +
+      '<button class="detail-close" onclick="closeDetailPanel()">&#10005;</button>' +
+      '<div class="detail-img" style="background:linear-gradient(135deg,' + pl.color + ' 0%,' + pl.color + '44 100%)">' +
+        imgContent +
+        '<div class="detail-img-overlay"></div>' +
+      '</div>' +
+    '</div>' +
+    '<div class="detail-body">' +
+      '<div class="detail-tag">' + d.tag + '</div>' +
+      '<div class="detail-title">' + d.heading + '</div>' +
+      '<div class="detail-company">' +
+        '<span>' + d.company + '</span>' +
+        '<span class="detail-year-badge">' + track.year + '</span>' +
+      '</div>' +
+      '<div class="detail-divider"></div>' +
+      '<div class="detail-text">' + d.long + '</div>' +
+      (d.highlight ? '<div class="detail-highlight">' + d.highlight + '</div>' : '') +
+    '</div>';
+
+  var inner = document.getElementById('detail-inner');
+  inner.innerHTML = html;
+  inner.scrollTop = 0;
+  inner.classList.add('slide-in');
+  setTimeout(function() { inner.classList.remove('slide-in'); }, 400);
+
+  document.getElementById('detail-panel').classList.add('open');
+  state.detailOpen = true;
+  document.getElementById('panel-toggle-btn').classList.add('active');
+}
+
+function closeDetailPanel() {
+  document.getElementById('detail-panel').classList.remove('open');
+  state.detailOpen = false;
+  document.getElementById('panel-toggle-btn').classList.remove('active');
+}
+
+function toggleDetailPanel() {
+  if (state.detailOpen) { closeDetailPanel(); }
+  else if (state.playlist && state.trackIdx !== null) {
+    openDetailPanel(state.playlist, state.playlist.tracks[state.trackIdx]);
+  }
+}
+
+function toggleDetailFromPlayer() { toggleDetailPanel(); }
+
+// ─────────────────────────────────────────────────────────────────
+//  PROGRESS
+// ─────────────────────────────────────────────────────────────────
+function startProgress() {
+  clearInterval(state.timer);
+  state.progress = 0;
+  state.playing = true;
+  updatePlayIcon();
+  setProgressUI(0);
+  state.timer = setInterval(function() {
+    if (!state.playing) return;
+    state.progress = Math.min(state.progress + 0.25, 100);
+    setProgressUI(state.progress);
+    if (state.progress >= 100) {
+      clearInterval(state.timer);
+      // Auto-advance to next track
+      var pl = state.playlist;
+      if (pl && state.trackIdx !== null && state.trackIdx < pl.tracks.length - 1) {
+        playTrack(state.trackIdx + 1);
+      } else {
+        state.playing = false;
+        updatePlayIcon();
+      }
+    }
+  }, 400);
+}
+
+function setProgressUI(pct) {
+  document.getElementById('p-fill').style.width = pct + '%';
+  document.getElementById('p-dot').style.left = pct + '%';
+  var total = 180, now = Math.round(pct / 100 * total);
+  document.getElementById('t-now').textContent = fmtTime(now);
+  document.getElementById('t-total').textContent = fmtTime(total);
+}
+
+function fmtTime(s) { return Math.floor(s/60) + ':' + ('0'+(s%60)).slice(-2); }
+function togglePlay() { state.playing = !state.playing; updatePlayIcon(); }
+function updatePlayIcon() {
+  var ip = document.getElementById('icon-play'), ipa = document.getElementById('icon-pause');
+  if (state.playing) { ip.classList.add('hidden'); ipa.classList.remove('hidden'); }
+  else { ip.classList.remove('hidden'); ipa.classList.add('hidden'); }
+}
+
+function scrub(e) {
+  var bar = document.getElementById('p-bar');
+  var rect = bar.getBoundingClientRect();
+  state.progress = Math.max(0, Math.min(100, (e.clientX-rect.left)/rect.width*100));
+  setProgressUI(state.progress);
+}
+
+// ─────────────────────────────────────────────────────────────────
+//  VIEWS
+// ─────────────────────────────────────────────────────────────────
+function showView(name) {
+  var vh = document.getElementById('view-home');
+  var vp = document.getElementById('view-playlist');
+  if (name === 'home') {
+    vh.classList.remove('hidden'); vp.classList.add('hidden');
+    vh.classList.add('fade-up'); setTimeout(function(){ vh.classList.remove('fade-up'); }, 400);
+  } else {
+    vh.classList.add('hidden'); vp.classList.remove('hidden');
+    vp.classList.add('fade-up'); setTimeout(function(){ vp.classList.remove('fade-up'); }, 400);
+  }
+  state.view = name;
+  document.getElementById('content').scrollTop = 0;
+}
+
+function showHome() {
+  var items = document.querySelectorAll('.pl-item');
+  for (var i = 0; i < items.length; i++) items[i].classList.remove('active');
+  document.getElementById('nav-home').classList.add('active');
+  setMobileNav('home');
+  showView('home');
+}
+
+function goBack() { if (state.view !== 'home') showHome(); }
+
+// ─────────────────────────────────────────────────────────────────
+//  MOBILE HELPERS
+// ─────────────────────────────────────────────────────────────────
+function setMobileNav(active) {
+  var btns = document.querySelectorAll('.mobile-nav-btn');
+  for (var i = 0; i < btns.length; i++) btns[i].classList.remove('active');
+  var b = document.getElementById('mob-btn-' + active);
+  if (b) b.classList.add('active');
+}
+
+function openMobileLibrary() {
+  setMobileNav('lib');
+  var sheet = document.getElementById('mobile-lib-sheet');
+  var list = document.getElementById('mobile-lib-list');
+  // Build list
+  var html = '';
+  for (var i = 0; i < PLAYLISTS.length; i++) {
+    var pl = PLAYLISTS[i];
+    html += '<div class="pl-item" onclick="openPlaylist(\'' + pl.id + '\'); closeMobileLibrary(); setMobileNav(\'home\')" style="margin-bottom:4px">' +
+      '<div class="pl-thumb" style="background:linear-gradient(135deg,' + pl.color + ',' + pl.color + '88)">' +
+        (pl.image ? '<img src="' + pl.image + '" onerror="this.style.display=\'none\'">' : '') +
+        '<span style="' + (pl.image ? 'display:none' : '') + '">' + pl.emoji + '</span>' +
+      '</div>' +
+      '<div class="pl-label"><div class="pl-name">' + pl.name + '</div><div class="pl-meta">Playlist &middot; Dinio Maag</div></div>' +
+    '</div>';
+  }
+  list.innerHTML = html;
+  sheet.style.display = 'block';
+}
+
+function closeMobileLibrary() {
+  document.getElementById('mobile-lib-sheet').style.display = 'none';
+}
+
+// Show/hide mobile detail button when a track is selected
+var _origOpenDetailPanel = openDetailPanel;
+openDetailPanel = function(pl, track) {
+  _origOpenDetailPanel(pl, track);
+  var btn = document.getElementById('mob-btn-detail');
+  if (btn) btn.style.display = '';
+};
+
+init();
+</script>
+</body>
+</html>
